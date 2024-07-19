@@ -118,7 +118,7 @@ jobs:
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig --name cluster
-
+          echo "$(kubectl get svc backend -o=jsonpath='{.status.loadBalancer.ingress[1].hostname}{"\n"}{.status.loadBalancer.ingress[0].ip}')"
       - name: Run init.sh
         run:  |
           ./init.sh || true
